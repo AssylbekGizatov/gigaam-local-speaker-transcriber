@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "scope": "Public read-speech CPU source checks; no physical capture or quality benchmark",
+  "fixtures": [
+    {
+      "language": "ru",
+      "sha256": "d8aaaa18a5098d7c6de0595ae7ac1e64cacd0d4022af3595213bdaf23be77e69",
+      "seconds": 11.29,
+      "source": "https://cdn.chatwm.opensmodel.sberdevices.ru/GigaAM/example.wav"
+    },
+    {
+      "language": "en",
+      "sha256": "799f78ed4beb4de7ceae3a809262d4ce242394342ccd1d58cef7d49dbc2def46",
+      "seconds": 5.855,
+      "source": "https://huggingface.co/datasets/hf-internal-testing/librispeech_asr_dummy/tree/5be91486e11a2d616f4ec5db8d3fd248585ac07a",
+      "sample": "1272-128104-0000",
+      "license": "CC BY 4.0",
+      "attribution": "LibriSpeech, Vassil Panayotov et al.; OpenSLR12"
+    }
+  ],
+  "single_voice_cross_source_pause": {
+    "clips": [
+      {
+        "fixture": "ru",
+        "source": "microphone",
+        "start_seconds": 0,
+        "word_count": 26,
+        "word_counts_by_estimated_speaker": {
+          "1": 21,
+          "None": 5
+        },
+        "word_counts_by_status": {
+          "provisional": 21,
+          "unknown": 5
+        },
+        "exact_word_timing_identity_conserved": true,
+        "seconds": 1.521
+      },
+      {
+        "fixture": "ru",
+        "source": "system",
+        "start_seconds": 900,
+        "word_count": 26,
+        "word_counts_by_estimated_speaker": {
+          "1": 21,
+          "None": 5
+        },
+        "word_counts_by_status": {
+          "provisional": 21,
+          "unknown": 5
+        },
+        "exact_word_timing_identity_conserved": true,
+        "seconds": 1.203
+      }
+    ],
+    "estimated_speakers": 1,
+    "history_expired_but_global_ids_preserved": true,
+    "final_word_timing_identity_conserved": true,
+    "stats": {
+      "speaker_count_estimate": 1,
+      "speaker_limit": 64,
+      "retained_turns": 2,
+      "turn_limit": 2048,
+      "history_seconds": 120,
+      "analyzed_windows": 4,
+      "warning": "",
+      "full_session_audio_retained": false
+    }
+  },
+  "two_fixtures_alternating_sources_scaled_repeat": {
+    "clips": [
+      {
+        "fixture": "ru",
+        "source": "microphone",
+        "start_seconds": 0,
+        "word_count": 26,
+        "word_counts_by_estimated_speaker": {
+          "1": 21,
+          "None": 5
+        },
+        "word_counts_by_status": {
+          "provisional": 21,
+          "unknown": 5
+        },
+        "exact_word_timing_identity_conserved": true,
+        "seconds": 1.018
+      },
+      {
+        "fixture": "en",
+        "source": "system",
+        "start_seconds": 15,
+        "word_count": 17,
+        "word_counts_by_estimated_speaker": {
+          "None": 1,
+          "2": 16
+        },
+        "word_counts_by_status": {
+          "unknown": 1,
+          "provisional": 16
+        },
+        "exact_word_timing_identity_conserved": true,
+        "seconds": 0.49
+      },
+      {
+        "fixture": "ru",
+        "source": "system",
+        "start_seconds": 40,
+        "word_count": 26,
+        "word_counts_by_estimated_speaker": {
+          "1": 21,
+          "None": 5
+        },
+        "word_counts_by_status": {
+          "provisional": 21,
+          "unknown": 5
+        },
+        "exact_word_timing_identity_conserved": true,
+        "seconds": 0.905
+      }
+    ],
+    "estimated_speakers": 2,
+    "stats": {
+      "speaker_count_estimate": 2,
+      "speaker_limit": 64,
+      "retained_turns": 5,
+      "turn_limit": 2048,
+      "history_seconds": 120,
+      "analyzed_windows": 5,
+      "warning": "",
+      "full_session_audio_retained": false
+    }
+  },
+  "python_network_attempts": 0,
+  "seconds": 26.763,
+  "unverified": [
+    "Real microphone or WASAPI loopback",
+    "Kazakh audio diarization quality",
+    "Same real voice switching language",
+    "Full meeting or DER with speaker ground truth",
+    "Physical network disconnection",
+    "True simultaneous voice separation"
+  ],
+  "backend_source_sha256": {
+    "gigaam_meeting/diarization.py": "ecbbd6322b28bcf5c999461876b586b966787c24b450294808133124de86a278"
+  }
+}

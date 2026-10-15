@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "scope": "Synthetic composition of two licensed public read-speech recordings; no DER benchmark or physical devices",
+  "fixtures": [
+    {
+      "id": "ru",
+      "sha256": "d8aaaa18a5098d7c6de0595ae7ac1e64cacd0d4022af3595213bdaf23be77e69",
+      "used_interval_seconds": [
+        0,
+        4
+      ],
+      "source": "https://cdn.chatwm.opensmodel.sberdevices.ru/GigaAM/example.wav"
+    },
+    {
+      "id": "en",
+      "sha256": "799f78ed4beb4de7ceae3a809262d4ce242394342ccd1d58cef7d49dbc2def46",
+      "used_interval_seconds": [
+        0,
+        4
+      ],
+      "source_revision": "5be91486e11a2d616f4ec5db8d3fd248585ac07a",
+      "sample": "1272-128104-0000",
+      "license": "CC-BY-4.0",
+      "attribution": "LibriSpeech, Vassil Panayotov et al., OpenSLR12"
+    }
+  ],
+  "composition": {
+    "sequential": "ru[0:4s] + .25s digital silence + en[0:4s]",
+    "known_splice_clock": {
+      "ru": [
+        100,
+        104
+      ],
+      "silence": [
+        104,
+        104.25
+      ],
+      "en": [
+        104.25,
+        108.25
+      ]
+    },
+    "overlap": ".5 * (ru[0:4s] + en[0:4s]); clipped-input avoided"
+  },
+  "sequential": {
+    "case": "two_distinct_public_fixtures_one_microphone_window",
+    "seconds": 8.25,
+    "absolute_start": 100,
+    "diarization_seconds": 4.535,
+    "estimated_profiles": 2,
+    "recognized_word_count": 24,
+    "words_by_speaker": {
+      "1": 11,
+      "None": 1,
+      "2": 12
+    },
+    "words_by_status": {
+      "final": 23,
+      "unknown": 1
+    },
+    "turns": [
+      {
+        "source": "microphone",
+        "start": 100.02253125,
+        "end": 104.08940625,
+        "speaker_ids": [
+          1
+        ],
+        "status": "provisional",
+        "confidence": null
+      },
+      {
+        "source": "microphone",
+        "start": 104.78128125,
+        "end": 108.25,
+        "speaker_ids": [
+          2
+        ],
+        "status": "provisional",
+        "confidence": null
+      }
+    ],
+    "exact_word_objects_timing_order_conserved": true,
+    "speaker_split_segments": 3,
+    "overlap_seconds": 0,
+    "audio_output_files_written": false
+  },
+  "overlap": {
+    "case": "sum_two_public_fixtures_same_microphone_window",
+    "seconds": 4.0,
+    "absolute_start": 200,
+    "diarization_seconds": 0.397,
+    "estimated_profiles": 0,
+    "recognized_word_count": 4,
+    "words_by_speaker": {
+      "None": 4
+    },
+    "words_by_status": {
+      "unknown": 2,
+      "overlap": 2
+    },
+    "turns": [
+      {
+        "source": "microphone",
+        "start": 200.02253125,
+        "end": 200.51190625,
+        "speaker_ids": [],
+        "status": "unknown",
+        "confidence": null
+      },
+      {
+        "source": "microphone",
+        "start": 200.51190625,
+        "end": 204.0,
+        "speaker_ids": [],
+        "status": "overlap",
+        "confidence": null
+      }
+    ],
+    "exact_word_objects_timing_order_conserved": true,
+    "speaker_split_segments": 2,
+    "overlap_seconds": 3.488,
+    "audio_output_files_written": false
+  },
+  "python_network_attempts": 0,
+  "seconds": 12.811,
+  "limits": [
+    "Splice/mix intervals are known synthetic construction, not frame-level human speaker ground truth",
+    "Overlapping ASR output does not separate simultaneous voices or establish both complete texts",
+    "No Kazakh audio, same speaker changing languages, real acoustic echo or physical WASAPI capture"
+  ],
+  "backend_source_sha256": {
+    "gigaam_meeting/diarization.py": "ecbbd6322b28bcf5c999461876b586b966787c24b450294808133124de86a278"
+  }
+}

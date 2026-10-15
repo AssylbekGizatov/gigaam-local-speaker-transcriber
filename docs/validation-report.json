@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "application_version": "0.2.0",
+  "as_of_date": "2026-10-15",
+  "source_repository": "AssylbekGizatov/gigaam-local-meeting-transcriber",
+  "baseline_commit": "6f43fdd292f54234e6abbd51b0f97ea0aba93bea",
+  "original_local_source_files_verified_unchanged": 111,
+  "automated_tests": {
+    "passed": 220,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 29.63,
+    "ruff": "clean",
+    "evidence": "verification/v0.2.0/unit-tests.xml"
+  },
+  "frozen_runtime": {
+    "status": "passed",
+    "seconds": 37.138,
+    "runtime": {
+      "python": "3.12.3",
+      "platform": "Windows",
+      "architecture": "AMD64",
+      "frozen": true,
+      "dependencies": {
+        "numpy": "2.2.6",
+        "torch": "2.10.0+cpu",
+        "torchaudio": "2.10.0+cpu",
+        "gigaam": "0.2.0",
+        "PyAudioWPatch": "0.2.12.9",
+        "python-docx": "1.2.0",
+        "reportlab": "4.4.9",
+        "onnxruntime": "1.23.2"
+      }
+    },
+    "speaker_check": {
+      "status": "passed",
+      "sha256": {
+        "segmentation.onnx": "220ad67ca923bef2fa91f2390c786097bf305bceb5e261d4af67b38e938e1079",
+        "embedding.onnx": "e9848563da86f263117134dfd7ad63c92355b37de492b55e325400c9d9c39012"
+      },
+      "providers": [
+        "CPUExecutionProvider"
+      ],
+      "mode": "bounded_fragment_preliminary; finalization without whole-session reanalysis",
+      "word_count": 26,
+      "exact_word_records_preserved": true,
+      "shared_voice_across_sources_gain_and_900_second_gap": true,
+      "estimated_speaker_count": 1,
+      "unknown_word_count": 0,
+      "registry": {
+        "speaker_count_estimate": 1,
+        "speaker_limit": 64,
+        "retained_turns": 1,
+        "turn_limit": 2048,
+        "history_seconds": 120,
+        "analyzed_windows": 3,
+        "warning": "",
+        "full_session_audio_retained": false
+      },
+      "elapsed_seconds": 4.734,
+      "scope": "Public Russian read speech and a scaled replay, not hardware, natural multilingual speech, or overlap accuracy."
+    },
+    "network": {
+      "exit_code": 0,
+      "clean_python_free_vm_tested": false,
+      "snapshots": 66,
+      "udp_endpoint_observations": 0,
+      "tcp_endpoint_observations": 0,
+      "status": "passed",
+      "endpoint_query_failures": 0,
+      "scope": "PID TCP/UDP endpoint sampling during public fixture self-test; sanitized PATH/PYTHONHOME/PYTHONPATH",
+      "physical_network_disconnection_tested": false,
+      "limitations": "Sampling can miss short connections/native activity routed via other processes. Python exists on this host but is excluded from child runtime search. No firewall/network settings changed. Inventory readability was checked before launch and query failures are counted; failed sampling is not zero-network proof."
+    },
+    "frozen_source_modules": 15
+  },
+  "public_audio_evidence": [
+    "verification/v0.2.0/public-fixture-report.json",
+    "verification/v0.2.0/multi-speaker-window-report.json"
+  ],
+  "manual_acceptance": "Not performed for v0.2.0; no live microphone/system capture initiated",
+  "limits": [
+    "Bounded fragment diarization, no full-recording reanalysis",
+    "No complete simultaneous voice separation",
+    "No real Kazakh/cross-language same-voice benchmark",
+    "No long hardware capture or clean Python-free physically offline VM"
+  ],
+  "diagnostic_privacy": "Public/synthetic input only; no user audio/text/device metadata, embeddings, secrets or private paths published"
+}
