@@ -1,0 +1,502 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "application_version": "0.2.0",
+  "verification_date": "2026-10-16",
+  "repository": "AssylbekGizatov/gigaam-local-speaker-transcriber",
+  "release_tag": "v0.2.0",
+  "release_build_commit": "5074258caf7639b503bc0efe92cc57a9e852beaa",
+  "release_url": "https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/releases/tag/v0.2.0",
+  "release_is_prerelease": true,
+  "ci": {
+    "url": "https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/actions/runs/38791679693",
+    "conclusion": "success",
+    "tests": 222,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_seconds": 11.401,
+    "ruff": "clean",
+    "frozen_selftest": {
+      "status": "passed",
+      "runtime": {
+        "python": "3.12.10",
+        "platform": "Windows",
+        "architecture": "AMD64",
+        "frozen": true,
+        "dependencies": {
+          "numpy": "2.2.6",
+          "torch": "2.10.0+cpu",
+          "torchaudio": "2.10.0+cpu",
+          "gigaam": "0.2.0",
+          "PyAudioWPatch": "0.2.12.9",
+          "python-docx": "1.2.0",
+          "reportlab": "4.4.9",
+          "onnxruntime": "1.23.2"
+        }
+      },
+      "elapsed_seconds": 8.336,
+      "public_fixture": {
+        "fixture_sha256": "d8aaaa18a5098d7c6de0595ae7ac1e64cacd0d4022af3595213bdaf23be77e69",
+        "duration_seconds": 11.29,
+        "inference_seconds_including_load": 4.52,
+        "expected_text_matches": true,
+        "word_count": 26,
+        "word_timestamps_valid": true,
+        "echo": {
+          "scope": "Actual GigaAM decoding of public PCM plus synthetic scaled/delayed microphone echo; no physical capture",
+          "delay_seconds": 0.12,
+          "microphone_gain": 0.3,
+          "reference_words": 26,
+          "recognized_microphone_words": 26,
+          "microphone_duplicate_words_removed": 26,
+          "system_reference_unchanged": true,
+          "system_word_timestamps_preserved": true,
+          "pcm_history_bytes": 9216000
+        },
+        "scope": "One public Russian fixture; Kazakh/English/mixed ASR and physical capture are not verified by this check."
+      },
+      "diarization": {
+        "status": "passed",
+        "sha256": {
+          "segmentation.onnx": "220ad67ca923bef2fa91f2390c786097bf305bceb5e261d4af67b38e938e1079",
+          "embedding.onnx": "e9848563da86f263117134dfd7ad63c92355b37de492b55e325400c9d9c39012"
+        },
+        "providers": [
+          "CPUExecutionProvider"
+        ],
+        "mode": "bounded_fragment_preliminary; finalization without whole-session reanalysis",
+        "word_count": 26,
+        "exact_word_records_preserved": true,
+        "shared_voice_across_sources_gain_and_900_second_gap": true,
+        "estimated_speaker_count": 1,
+        "unknown_word_count": 0,
+        "registry": {
+          "speaker_count_estimate": 1,
+          "speaker_limit": 64,
+          "retained_turns": 1,
+          "turn_limit": 2048,
+          "history_seconds": 120,
+          "analyzed_windows": 3,
+          "warning": "",
+          "full_session_audio_retained": false
+        },
+        "elapsed_seconds": 0.91,
+        "scope": "Public Russian read speech and a scaled replay, not hardware, natural multilingual speech, or overlap accuracy."
+      },
+      "model": {
+        "name": "ai-sage/GigaAM-Multilingual",
+        "architecture": "220M CTC",
+        "device": "cpu",
+        "dtype": "float32",
+        "model_revision": "2f8a57144e6ec3adfd32fe0484d9ea9913305bc8",
+        "code_revision": "7447938d791c4f3e643386ee22c33777004293a5",
+        "sha256": {
+          "config.json": "c830232c7d51688a630a221517b52585ab5ee57e1d3c21bcbae01759351d2653",
+          "pytorch_model.bin": "e1db43873ec5e296f229572e06e2470fc157ac9f8d4aacabda295630b9b91728"
+        }
+      },
+      "export_formats": [
+        "TXT",
+        "MD",
+        "DOCX",
+        "PDF",
+        "JSON"
+      ],
+      "existing_export_files_preserved": true,
+      "blocked_python_network_attempts": 0,
+      "physical_capture_tested": false
+    },
+    "runtime_network_audit": {
+      "udp_endpoint_observations": 0,
+      "endpoint_query_failures": 0,
+      "status": "passed",
+      "snapshots": 30,
+      "exit_code": 0,
+      "physical_network_disconnection_tested": false,
+      "clean_python_free_vm_tested": false,
+      "limitations": "Sampling can miss short connections/native activity routed via other processes. Python exists on this host but is excluded from child runtime search. No firewall/network settings changed. Inventory readability was checked before launch and query failures are counted; failed sampling is not zero-network proof.",
+      "scope": "PID TCP/UDP endpoint sampling during public fixture self-test; sanitized PATH/PYTHONHOME/PYTHONPATH",
+      "tcp_endpoint_observations": 0
+    },
+    "frozen_source_attestation": {
+      "status": "passed",
+      "method": "Python bytecode/constants, exception tables, stack sizes and names compared; debug paths/line tables excluded",
+      "files": [
+        {
+          "file": "app.py",
+          "source_sha256": "c92828678b79000efa5ae30117b86d5692e5137526fc2a59bfa0d4d97f6f19e5",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/__init__.py",
+          "source_sha256": "330b5444f8fe1a0dec0ab7fb04f56d210a38ce0f84b6213ffaceb8124f036a3c",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/audio.py",
+          "source_sha256": "21c36474d44cb220933c3012018b3a7b2f82167861091ce0066b56e668b2973e",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/contracts.py",
+          "source_sha256": "597ce5efa996f896e08371a44615ce44cb99d49d96b84461adcbcbd4e2ef1480",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/diarization.py",
+          "source_sha256": "ecbbd6322b28bcf5c999461876b586b966787c24b450294808133124de86a278",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/echo.py",
+          "source_sha256": "dc9d3ecd3a99ceb1ebbf87341c95818e39e38cc6c16b1fc14e7deee95e2ae153",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/engine.py",
+          "source_sha256": "46f21075436625fe5faf1cfe18dfe7743c718b0c90143b1e9ed4d1a4436d5bec",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/exports.py",
+          "source_sha256": "40bc5a415dea00315028578352e989538c1ac0cadde5ecfc41bd180c97765d1f",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/gui.py",
+          "source_sha256": "3268b3e3c0cd3fff6d69a53612b12a2a85964db5c28aeae5a89f275a15727a81",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/offline.py",
+          "source_sha256": "eeafac59598471af44ff8ac34fb12a5e96e0f06be5fe52c56b650efc9289ebda",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/recording.py",
+          "source_sha256": "0fe5f9409dda37885b7131393065fb9954cd74f721133cd704b5c833f5d56567",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/selftest.py",
+          "source_sha256": "b695dc25a01c72b1466ba65060009c7e2929facfd56db23ed77fdc50e621593e",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/session.py",
+          "source_sha256": "14134cb93d8ef4965dc68500e1bf3b6b7600bf3710ff062affebcf007e862b20",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/storage.py",
+          "source_sha256": "d484717518ebade46c2bd13dffb67f951d5d0ed2de3b32d68db54be023e3c855",
+          "bytecode_matches": true
+        },
+        {
+          "file": "gigaam_meeting/streaming.py",
+          "source_sha256": "072143546e877751513624da5b63de5abf2fd3644e44461eb9026197cc06d33a",
+          "bytecode_matches": true
+        }
+      ]
+    }
+  },
+  "published_archive_verification": {
+    "schema_version": 1,
+    "status": "passed",
+    "repository": "AssylbekGizatov/gigaam-local-speaker-transcriber",
+    "release_tag": "v0.2.0",
+    "release_url": "https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/releases/tag/v0.2.0",
+    "github_assets": [
+      {
+        "file": "GigaAM-Speakers-windows-x64.zip",
+        "bytes": 1033476178,
+        "sha256": "711f904a89f312eed3256624fcec6ccc2954bdb92ff898a43166262f2b4b91bf",
+        "github_digest_matches": true,
+        "github_size_matches": true
+      },
+      {
+        "file": "GigaAM-Speakers-windows-x64.zip.sha256",
+        "bytes": 99,
+        "sha256": "e6bc7b1cb4285532f3e9f01dbcff737d85c3ce6167a89a8c059e38494b47e671",
+        "github_digest_matches": true,
+        "github_size_matches": true
+      },
+      {
+        "file": "GigaAM-Speakers-windows-x64-file-manifest.json",
+        "bytes": 705371,
+        "sha256": "bcce13bb18575e3559b0e0e7b6d90f0c47ed2223c8ce8df5939f84591e089532",
+        "github_digest_matches": true,
+        "github_size_matches": true
+      },
+      {
+        "file": "GigaAM-Speakers-windows-x64-dll-audit.json",
+        "bytes": 122590,
+        "sha256": "7599bb10b176060d94c4ae54b133c82fe91304e87b260c0f9d294585a312a6f1",
+        "github_digest_matches": true,
+        "github_size_matches": true
+      }
+    ],
+    "archive": {
+      "file": "GigaAM-Speakers-windows-x64.zip",
+      "bytes": 1033476178,
+      "sha256": "711f904a89f312eed3256624fcec6ccc2954bdb92ff898a43166262f2b4b91bf",
+      "sidecar_matches": true,
+      "github_asset_digest_matches": true,
+      "whole_zip_crc_passed": true,
+      "manifested_files_verified": 4055,
+      "uncompressed_manifest_bytes": 1418549981,
+      "no_missing_or_extra_files": true,
+      "safe_relative_windows_paths": true,
+      "duplicate_or_alias_paths": false,
+      "symlinks_or_encrypted_members": false,
+      "embedded_manifest_and_audit_match_sidecars": true
+    },
+    "native_audit": {
+      "ci_audit_status": "passed",
+      "manifested_native_files": 130,
+      "all_native_manifest_hashes_match_audit": true,
+      "pe_architecture_or_imports_independently_recomputed": false
+    },
+    "method": "Offline standard-library validation of supplied GitHub asset digests/sizes, checksum sidecar, exact ZIP members, every member CRC and SHA256/size, and native audit-manifest consistency",
+    "application_executed": false,
+    "audio_devices_opened": false,
+    "archive_extracted": false,
+    "limits": [
+      "Caller must acquire the raw metadata separately from the official GitHub REST API; this helper does not authenticate the supplied metadata file or verify a publisher signature",
+      "Archive integrity checks do not repeat CI model inference, native execution, capture, a clean Windows machine, or physical offline networking tests",
+      "Native PE architecture and dependency checks are preserved CI evidence with matching hashes, not independently rerun by this helper"
+    ]
+  },
+  "published_source_verification": {
+    "status": "passed",
+    "repository": "AssylbekGizatov/gigaam-local-speaker-transcriber",
+    "commit": "5074258caf7639b503bc0efe92cc57a9e852beaa",
+    "tree": "36e375f81c2bb368f5febc3ba016642216967b49",
+    "files": 130,
+    "archive": "GigaAM-Speakers-source-v0.2.0.zip",
+    "bytes": 1082513,
+    "sha256": "ea67db1fbffb36710facb222718e1d8c70bcb2ab6c6658dd15e507d8267e51cb",
+    "all_zip_crc_passed": true,
+    "all_contents_match_git_tree": true,
+    "privacy_audit": "passed",
+    "github_asset_digest_and_size_match": true
+  },
+  "downloaded_executable_local_selftest": {
+    "status": "passed",
+    "runtime": {
+      "python": "3.12.10",
+      "platform": "Windows",
+      "architecture": "AMD64",
+      "frozen": true,
+      "dependencies": {
+        "numpy": "2.2.6",
+        "torch": "2.10.0+cpu",
+        "torchaudio": "2.10.0+cpu",
+        "gigaam": "0.2.0",
+        "PyAudioWPatch": "0.2.12.9",
+        "python-docx": "1.2.0",
+        "reportlab": "4.4.9",
+        "onnxruntime": "1.23.2"
+      }
+    },
+    "elapsed_seconds": 25.333,
+    "public_fixture": {
+      "fixture_sha256": "d8aaaa18a5098d7c6de0595ae7ac1e64cacd0d4022af3595213bdaf23be77e69",
+      "duration_seconds": 11.29,
+      "inference_seconds_including_load": 13.873,
+      "expected_text_matches": true,
+      "word_count": 26,
+      "word_timestamps_valid": true,
+      "echo": {
+        "scope": "Actual GigaAM decoding of public PCM plus synthetic scaled/delayed microphone echo; no physical capture",
+        "delay_seconds": 0.12,
+        "microphone_gain": 0.3,
+        "reference_words": 26,
+        "recognized_microphone_words": 26,
+        "microphone_duplicate_words_removed": 26,
+        "system_reference_unchanged": true,
+        "system_word_timestamps_preserved": true,
+        "pcm_history_bytes": 9216000
+      },
+      "scope": "One public Russian fixture; Kazakh/English/mixed ASR and physical capture are not verified by this check."
+    },
+    "diarization": {
+      "status": "passed",
+      "sha256": {
+        "segmentation.onnx": "220ad67ca923bef2fa91f2390c786097bf305bceb5e261d4af67b38e938e1079",
+        "embedding.onnx": "e9848563da86f263117134dfd7ad63c92355b37de492b55e325400c9d9c39012"
+      },
+      "providers": [
+        "CPUExecutionProvider"
+      ],
+      "mode": "bounded_fragment_preliminary; finalization without whole-session reanalysis",
+      "word_count": 26,
+      "exact_word_records_preserved": true,
+      "shared_voice_across_sources_gain_and_900_second_gap": true,
+      "estimated_speaker_count": 1,
+      "unknown_word_count": 0,
+      "registry": {
+        "speaker_count_estimate": 1,
+        "speaker_limit": 64,
+        "retained_turns": 1,
+        "turn_limit": 2048,
+        "history_seconds": 120,
+        "analyzed_windows": 3,
+        "warning": "",
+        "full_session_audio_retained": false
+      },
+      "elapsed_seconds": 1.884,
+      "scope": "Public Russian read speech and a scaled replay, not hardware, natural multilingual speech, or overlap accuracy."
+    },
+    "model": {
+      "name": "ai-sage/GigaAM-Multilingual",
+      "architecture": "220M CTC",
+      "device": "cpu",
+      "dtype": "float32",
+      "model_revision": "2f8a57144e6ec3adfd32fe0484d9ea9913305bc8",
+      "code_revision": "7447938d791c4f3e643386ee22c33777004293a5",
+      "sha256": {
+        "config.json": "c830232c7d51688a630a221517b52585ab5ee57e1d3c21bcbae01759351d2653",
+        "pytorch_model.bin": "e1db43873ec5e296f229572e06e2470fc157ac9f8d4aacabda295630b9b91728"
+      }
+    },
+    "export_formats": [
+      "TXT",
+      "MD",
+      "DOCX",
+      "PDF",
+      "JSON"
+    ],
+    "existing_export_files_preserved": true,
+    "blocked_python_network_attempts": 0,
+    "physical_capture_tested": false
+  },
+  "downloaded_executable_local_network_sampling": {
+    "status": "passed",
+    "exit_code": 0,
+    "endpoint_query_failures": 0,
+    "tcp_endpoint_observations": 0,
+    "udp_endpoint_observations": 0,
+    "limitations": "Sampling can miss short connections/native activity routed via other processes. Python exists on this host but is excluded from child runtime search. No firewall/network settings changed. Inventory readability was checked before launch and query failures are counted; failed sampling is not zero-network proof.",
+    "snapshots": 46,
+    "scope": "PID TCP/UDP endpoint sampling during public fixture self-test; sanitized PATH/PYTHONHOME/PYTHONPATH",
+    "clean_python_free_vm_tested": false,
+    "physical_network_disconnection_tested": false
+  },
+  "downloaded_executable_local_source_attestation": {
+    "status": "passed",
+    "method": "Python bytecode/constants, exception tables, stack sizes and names compared; debug paths/line tables excluded",
+    "files": [
+      {
+        "file": "app.py",
+        "source_sha256": "c92828678b79000efa5ae30117b86d5692e5137526fc2a59bfa0d4d97f6f19e5",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/__init__.py",
+        "source_sha256": "330b5444f8fe1a0dec0ab7fb04f56d210a38ce0f84b6213ffaceb8124f036a3c",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/audio.py",
+        "source_sha256": "21c36474d44cb220933c3012018b3a7b2f82167861091ce0066b56e668b2973e",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/contracts.py",
+        "source_sha256": "597ce5efa996f896e08371a44615ce44cb99d49d96b84461adcbcbd4e2ef1480",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/diarization.py",
+        "source_sha256": "ecbbd6322b28bcf5c999461876b586b966787c24b450294808133124de86a278",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/echo.py",
+        "source_sha256": "dc9d3ecd3a99ceb1ebbf87341c95818e39e38cc6c16b1fc14e7deee95e2ae153",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/engine.py",
+        "source_sha256": "46f21075436625fe5faf1cfe18dfe7743c718b0c90143b1e9ed4d1a4436d5bec",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/exports.py",
+        "source_sha256": "40bc5a415dea00315028578352e989538c1ac0cadde5ecfc41bd180c97765d1f",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/gui.py",
+        "source_sha256": "3268b3e3c0cd3fff6d69a53612b12a2a85964db5c28aeae5a89f275a15727a81",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/offline.py",
+        "source_sha256": "eeafac59598471af44ff8ac34fb12a5e96e0f06be5fe52c56b650efc9289ebda",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/recording.py",
+        "source_sha256": "0fe5f9409dda37885b7131393065fb9954cd74f721133cd704b5c833f5d56567",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/selftest.py",
+        "source_sha256": "b695dc25a01c72b1466ba65060009c7e2929facfd56db23ed77fdc50e621593e",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/session.py",
+        "source_sha256": "14134cb93d8ef4965dc68500e1bf3b6b7600bf3710ff062affebcf007e862b20",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/storage.py",
+        "source_sha256": "d484717518ebade46c2bd13dffb67f951d5d0ed2de3b32d68db54be023e3c855",
+        "bytecode_matches": true
+      },
+      {
+        "file": "gigaam_meeting/streaming.py",
+        "source_sha256": "072143546e877751513624da5b63de5abf2fd3644e44461eb9026197cc06d33a",
+        "bytecode_matches": true
+      }
+    ]
+  },
+  "expanded_downloaded_archive": {
+    "schema_version": 1,
+    "status": "passed",
+    "verification_date": "2026-10-16",
+    "archive_sha256": "711f904a89f312eed3256624fcec6ccc2954bdb92ff898a43166262f2b4b91bf",
+    "manifested_files_verified": 4055,
+    "extra_or_missing_files": false,
+    "exclusive_new_extraction": true,
+    "safe_paths_and_root_checked": true,
+    "application_executed": false,
+    "audio_devices_opened": false
+  },
+  "original_repository": {
+    "full_name": "AssylbekGizatov/gigaam-local-meeting-transcriber",
+    "commit": "6f43fdd292f54234e6abbd51b0f97ea0aba93bea",
+    "local_source_files_sha256_verified_unchanged": 111,
+    "remote_main_read_verified_unchanged": true
+  },
+  "not_tested": [
+    "New-version physical microphone and WASAPI loopback acceptance",
+    "Real headphones, device changes, natural room echo and double talk",
+    "A long live hardware meeting with inference and GUI",
+    "Natural Kazakh and real single-speaker RU/KK/EN code switching",
+    "Clean Windows without installed Python and physically disconnected networking",
+    "Full diarization dataset with human speaker ground truth"
+  ],
+  "product_limits": [
+    "Fragment labels are preliminary; Stop drains/finalizes without full-meeting acoustic reanalysis",
+    "Short or acoustically ambiguous turns can remain unknown and voice identities are estimates",
+    "Single-source overlapping voices are marked, not independently separated and fully transcribed",
+    "Computer audio captures all applications on the selected output device; per-application capture is unavailable",
+    "Endpoint sampling and Python network guards do not certify every native or system network path"
+  ],
+  "publication_policy": "Existing source repository, release tags and assets were not overwritten; no user audio was captured by delivery checks."
+}

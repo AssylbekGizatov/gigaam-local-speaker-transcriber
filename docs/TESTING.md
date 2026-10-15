@@ -1,10 +1,14 @@
 # Проверки GigaAM Speakers v0.2.0
 
-Дата: **15 октября 2026**. Исходный GigaAM-Meeting v0.1.2 не изменён. Старые файлы verification/v0.1.x — только историческая основа, не доказательство новой диаризации.
+Локальные проверки ниже выполнены **15 октября 2026**; результат финального опубликованного CI указан отдельно. Исходный GigaAM-Meeting v0.1.2 не изменён. Старые файлы verification/v0.1.x — только историческая основа, не доказательство новой диаризации.
 
 ## Исходники и контракты
 
-Финальный набор: **220 pytest passed за 29,63 с**, Ruff без ошибок. Проверки охватывают прежний WASAPI/streaming/echo/export/lifecycle и новые speaker contracts, точные Word records, источник отдельно от говорящего, speaker registry, unknown/overlap, source/time boundary ownership, паузы, bounded history/capacity и JSON.
+Историческая локальная проверка перед исправлением Windows checkout: **220 pytest passed за 29,63 с**, Ruff без ошибок. Это исходный локальный отчёт, а не число тестов финального CI. Проверки охватывают прежний WASAPI/streaming/echo/export/lifecycle и новые speaker contracts, точные Word records, источник отдельно от говорящего, speaker registry, unknown/overlap, source/time boundary ownership, паузы, bounded history/capacity и JSON.
+
+Финальный CI [38791679693](https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/actions/runs/38791679693) на Windows 2022/Python 3.12.10 завершился успешно: **222 pytest passed за 11,41 с**, Ruff без ошибок. Его source commit и опубликованный tag `v0.2.0` — `5074258caf7639b503bc0efe92cc57a9e852beaa`. Добавленные два теста проверяют включение `.gitattributes` в исходники и реальный свежий Git checkout с `autocrlf=true`: все pinned license/binary/core bytes сохранены. Отрицательный контроль без атрибутов воспроизводит изменение LF→CRLF и прежнюю ошибку SHA256 лицензии.
+
+[Отчёт об опубликованном Release](verification/v0.2.0/published-release.json) связывает окончательные CI, tag и конкретные опубликованные артефакты. Существующие tag и assets не заменяются последующими обновлениями документации.
 
 Новый backend: 28 детерминированных тестов. Проверяются shared IDs независимо от канала/текста языка, несколько голосов у одного mic, short/uncertain embedding, max64profiles, история120sec/2048turns, temporal gaps, failed-window masking и exactWord conservation. Это правила и regression tests, не DER-бенчмарк.
 
@@ -21,11 +25,11 @@
 - Искусственное одновременное смешивание этих голосов → **3,488с обнаруженного overlap**, только **4 ASR слова** сохранены один раз с unknown/overlap. Чистых embeddings недостаточно, фиктивных speaker profiles не создано. Это поддержка отметки перекрытия, **не разделение двух голосов или полнота обоих текстов**.
 - Python network guard:0attempts. Эти тесты не открывали микрофон/loopback и не являются независимой OS network certification.
 
-## Собранный EXE: выполнено
+## Локальная сборка: исторический self-test
 
-Локальная Windows x64 сборка с Python runtime3.12.3; canonical CI настроен3.12.10. Поставляется самостоятельный runtime, а не вызов системного Python. Точный installed supplier graph и readonly reuse source в provenance сборки. Побайтная воспроизводимость ZIP не заявляется.
+Историческая локальная Windows x64 сборка использовала Python runtime3.12.3; успешно выполненный canonical CI использовал3.12.10. Поставляется самостоятельный runtime, а не вызов системного Python. Точный installed supplier graph и readonly reuse source в provenance соответствующей сборки. Побайтная воспроизводимость ZIP не заявляется; времена и выборки локального self-test ниже не приписываются архиву CI.
 
-Финальный GigaAM-Speakers.exe:
+Локальный GigaAM-Speakers.exe, проверенный до выпуска CI:
 
 - frozen source attestation: **15 модулей** совпали с финальными исходниками;
 - actual offline self-test: **passed, 37,138с**;
@@ -35,7 +39,38 @@
 - сеть: **66 endpoint snapshots,0TCP,0UDP,0queryfailures, exit0**, Pythonguard0. При ошибках queries обновлённый аудит не выдаёт ложный успешный нулевой результат;
 - захват hardware в self-test не запускался.
 
-Отчёты внутри ZIP provenance и текущего verification/v0.2.0. PE audit, ZIP SHA/CRC/manifest проверяются отдельным шагом упаковки каждого конкретного архива; финальные asset значения не выводятся из отчёта другого ZIP.
+Эти локальные отчёты сохранены в текущем verification/v0.2.0. Они не подменяют результаты self-test другого архива. PE audit, ZIP SHA/CRC/manifest проверяются отдельно для каждого конкретного архива.
+
+## Опубликованный канонический ZIP: CI и проверка скачанных байтов
+
+Каноническая [сборка v0.2.0](https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/releases/tag/v0.2.0) создана успешным CI `38791679693` на commit `5074258caf7639b503bc0efe92cc57a9e852beaa`. Полностью скачанный `GigaAM-Speakers-windows-x64.zip` имеет **1 033 476 178 байт** и SHA256:
+
+```text
+711f904a89f312eed3256624fcec6ccc2954bdb92ff898a43166262f2b4b91bf
+```
+
+Проверены совпадение SHA256 с опубликованным checksum и GitHub asset digest, CRC всего ZIP, **4 055** записей manifest, соответствие хешей **130** нативных файлов сохранённому PE audit CI и контрольные суммы четырёх опубликованных Release assets. Архитектура PE и imports этим проверяющим архива повторно не вычислялись; они проверены CI. Исходный архив tag содержит **130** разрешённых файлов и отдельно проверен по байтам; модели и runtime в исходный архив не входят.
+
+Следующие значения взяты из встроенного evidence именно этого канонического CI ZIP:
+
+- Python runtime **3.12.10**, frozen self-test **passed за 8,336 с**;
+- настоящий GigaAM/Public PCM: inference включая загрузку **4,52 с**;
+- локальная CPU-диаризация **0,91 с**, **26 exact Word records**, сохранение ID между источниками/gain и gap900sec;
+- frozen-source attestation: **15 модулей**, совпадают с исходниками опубликованного tag;
+- сеть при self-test CI: **30 endpoint snapshots, 0 TCP, 0 UDP, 0 query failures**;
+- полный pytest: **222 passed за 11,41 с**, Ruff без ошибок.
+
+Дополнительно этот скачанный архив полностью извлечён в новую папку: проверены SHA256 всех **4 055** файлов, без лишних или отсутствующих файлов. Именно извлечённый канонический EXE запущен локально с public PCM, без открытия микрофона/loopback:
+
+- self-test **passed за 25,333 с**, bundled Python **3.12.10**;
+- настоящий GigaAM inference включая загрузку **13,873 с**, 26 слов с правильными временными метками;
+- CPU-диаризация **1,884 с**, сохранены exact Word records и ID между источниками/gain и gap900sec;
+- synthetic echo: 26 повторных microphone слов удалены, system text и Word timestamps сохранены;
+- TXT/MD/DOCX/PDF/JSON exports и отказ от перезаписи прошли;
+- локальная frozen-source attestation: **15 модулей** совпадают с исходниками опубликованной версии;
+- отдельный локальный network audit: **passed, 46 snapshots, 0 TCP, 0 UDP, 0 query failures**, exit0; Python network attempts0.
+
+Все эти проверки и их границы отражены в [published-release.json](verification/v0.2.0/published-release.json). Числа CI и локального запуска не являются гарантией задержки на другом компьютере, качеством диаризации реальной встречи или проверкой физических аудиоустройств. Sampled endpoints не доказывают отсутствие всех возможных native/system сетевых путей; чистая Windows без Python и физическое отключение сети по-прежнему не проверены.
 
 ## Что не проверено и ограничения
 

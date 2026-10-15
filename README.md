@@ -4,6 +4,13 @@ A portable Windows x64 desktop application for **local speech recognition and es
 
 Version **0.2.0** is developed in a separate repository from [gigaam-local-meeting-transcriber](https://github.com/AssylbekGizatov/gigaam-local-meeting-transcriber), based on its MIT-licensed code at commit `6f43fdd292f54234e6abbd51b0f97ea0aba93bea`. The original repository is unchanged.
 
+**Published prerelease: [v0.2.0](https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/releases/tag/v0.2.0).**
+Download the complete [Windows x64 application ZIP](https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/releases/download/v0.2.0/GigaAM-Speakers-windows-x64.zip)
+and its [matching SHA256 file](https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/releases/download/v0.2.0/GigaAM-Speakers-windows-x64.zip.sha256).
+This is a preview with estimated speaker labels and the limitations below, not a
+certified meeting diarization system. Developer source archives are not the
+runnable application.
+
 ## What changed
 
 - The same **GigaAM Multilingual 220M CTC** recognizes Russian, Kazakh, English, and mixed speech. Its code, weights, CPU float32 path, and checksum pins are retained.
@@ -15,7 +22,7 @@ Version **0.2.0** is developed in a separate repository from [gigaam-local-meeti
 
 ## Start in three steps
 
-1. Obtain `GigaAM-Speakers-windows-x64.zip` with its matching SHA256, verify it, and extract **the entire archive** into a new local folder.
+1. Download the [application ZIP](https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/releases/download/v0.2.0/GigaAM-Speakers-windows-x64.zip) and [matching SHA256](https://github.com/AssylbekGizatov/gigaam-local-speaker-transcriber/releases/download/v0.2.0/GigaAM-Speakers-windows-x64.zip.sha256), verify it, and extract **the entire archive** into a new local folder.
 2. Open `GigaAM-Speakers.exe`. Select the microphone, the output device used by your call, and a local export folder. The optional diarization switch applies to the next session; it is enabled by default in the UI.
 3. Obtain the necessary consent, explicitly permit capture, and click **«Начать»**. The level check also requires permission and resets it after checking. At the end click **«Остановить и завершить текст»**, wait for the queue to drain, and export.
 
@@ -55,6 +62,7 @@ Optional audio saving creates separate source WAV files and a shared timeline. E
 | [DIARIZATION.md](docs/DIARIZATION.md) | Fragment mode, shared IDs, alignment, overlap, and limitations |
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Capture → recognition → echo reduction → speaker annotation |
 | [TESTING.md](docs/TESTING.md) | Actual tests and unverified scenarios |
+| [Published release evidence](docs/verification/v0.2.0/published-release.json) | Exact published tag, CI result and artifact verification; separate from historical local reports |
 | [DEVOPS_RUNBOOK.md](docs/DEVOPS_RUNBOOK.md) | Russian deployment/build/update runbook |
 | [BUILD.md](docs/BUILD.md) | Build and packaging commands |
 | [CHANGELOG.md](CHANGELOG.md) | Version history |
