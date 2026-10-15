@@ -173,11 +173,15 @@ if ($LASTEXITCODE -ne 0) { throw 'Source audit failed' }
 
 Workflow windows.yml ручной, Windows2022/Python3.12.10. Для build-only:
 
+В JSON для `gh workflow run --json` параметр `publish` передаётся строкой
+`'false'` или `'true'`: GitHub CLI читает значения inputs как строки, а GitHub
+Actions преобразует их по объявленному в workflow типу `boolean`.
+
 ```powershell
 $taskRepo = 'AssylbekGizatov/gigaam-local-speaker-transcriber'
 gh auth status
 if ($LASTEXITCODE -ne 0) { throw 'Нужна разрешённая авторизация GitHub CLI' }
-@{publish=$false;tag='v0.2.0'} | ConvertTo-Json -Compress | gh workflow run windows.yml --repo $taskRepo --ref main --json
+@{publish='false';tag='v0.2.0'} | ConvertTo-Json -Compress | gh workflow run windows.yml --repo $taskRepo --ref main --json
 if ($LASTEXITCODE -ne 0) { throw 'Dispatch failed' }
 gh run list --repo $taskRepo --workflow windows.yml --limit 10 --json databaseId,headSha,status,conclusion,url
 $taskRunId = Read-Host 'ID вашего run; сверьте время и headSha'
@@ -195,7 +199,7 @@ $taskTags = @(git ls-remote --tags origin ('refs/tags/' + $taskNewTag))
 if ($LASTEXITCODE -ne 0 -or $taskTags.Count -ne 0) { throw 'Tag не проверен или занят' }
 $taskReleaseTags = gh api --paginate ('repos/' + $taskRepo + '/releases') --jq '.[].tag_name'
 if ($LASTEXITCODE -ne 0 -or @($taskReleaseTags) -contains $taskNewTag) { throw 'Release не проверен или занят' }
-@{publish=$true;tag=$taskNewTag} | ConvertTo-Json -Compress | gh workflow run windows.yml --repo $taskRepo --ref main --json
+@{publish='true';tag=$taskNewTag} | ConvertTo-Json -Compress | gh workflow run windows.yml --repo $taskRepo --ref main --json
 if ($LASTEXITCODE -ne 0) { throw 'Publish dispatch failed' }
 ```
 
