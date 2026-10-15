@@ -3,6 +3,8 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import shutil
+import subprocess
 from urllib.parse import quote
 import zipfile
 
@@ -30,6 +32,66 @@ def test_source_selection_never_walks_generated_or_private_trees(tmp_path):
     selected = {path.relative_to(tmp_path).as_posix() for path in publication.source_paths(tmp_path)}
     assert set(approved) <= selected
     assert not set(private) & selected
+
+
+def test_source_snapshot_includes_exact_byte_checkout_attributes():
+    root = Path(__file__).resolve().parents[1]
+    assert ".gitattributes" in publication.ROOT_FILES
+    report, files = publication.audit_source(root)
+    assert not report["findings"]
+    entry = next(item for item in files if item["path"] == ".gitattributes")
+    assert entry["encoding"] == "utf-8"
+    assert entry["content"].encode("utf-8") == (root / ".gitattributes").read_bytes()
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="Checkout regression requires the build-time Git prerequisite")
+def test_windows_autocrlf_checkout_preserves_all_pinned_source_and_core_bytes(tmp_path):
+    from build.acquire_diarization import LICENSE_FILES
+
+    root = Path(__file__).resolve().parents[1]
+    repository = tmp_path / "repository"
+    repository.mkdir()
+    paths = [".gitattributes", "fonts/LICENSE.txt", *publication.BINARY_HASHES,
+             *("assets/licenses/diarization/" + name for name in LICENSE_FILES),
+             "app.py", *(path.relative_to(root).as_posix() for path in (root / "gigaam_meeting").glob("*.py"))]
+    expected = {}
+    for relative in paths:
+        original = (root / relative).read_bytes()
+        destination = repository / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(original)
+        expected[relative] = hashlib.sha256(original).hexdigest()
+
+    def git(*arguments, cwd=repository):
+        result = subprocess.run(["git", "-c", "core.autocrlf=true", "-c", "core.eol=crlf",
+                                 "-c", "user.name=Source byte regression", "-c", "user.email=build@example.invalid",
+                                 *arguments], cwd=cwd, capture_output=True, check=True)
+        return result.stdout
+
+    git("init", "--quiet")
+    git("add", "--", *paths)
+    git("commit", "--quiet", "-m", "Local checkout byte regression")
+    checkout = tmp_path / "checkout"
+    git("clone", "--quiet", "--no-checkout", "--no-hardlinks", str(repository), str(checkout))
+    git("checkout", "--quiet", "HEAD", cwd=checkout)
+    assert all(hashlib.sha256((checkout / relative).read_bytes()).hexdigest() == checksum
+               for relative, checksum in expected.items())
+    assert all(expected[path] == checksum for path, checksum in publication.BINARY_HASHES.items())
+    assert all(expected["assets/licenses/diarization/" + name] == checksum for name, checksum in LICENSE_FILES.items())
+    attributes = git("check-attr", "text", "--", *paths, cwd=checkout).decode("utf-8")
+    assert len(attributes.splitlines()) == len(paths)
+    assert all(line.endswith(": text: unset") for line in attributes.splitlines())
+    # Negative control reproduces the original Windows CI failure: the same
+    # committed LF vendor notice is rewritten to CRLF without the attributes.
+    git("rm", "--quiet", "--", ".gitattributes")
+    git("commit", "--quiet", "-m", "Local negative control without attributes")
+    unprotected = tmp_path / "unprotected-checkout"
+    git("clone", "--quiet", "--no-checkout", "--no-hardlinks", str(repository), str(unprotected))
+    git("checkout", "--quiet", "HEAD", cwd=unprotected)
+    notice = "assets/licenses/diarization/LICENSE-pyannote-MIT.txt"
+    rewritten = (unprotected / notice).read_bytes()
+    assert hashlib.sha256(rewritten).hexdigest() != expected[notice]
+    assert rewritten.replace(b"\r\n", b"\n") == (root / notice).read_bytes()
 
 
 @pytest.mark.parametrize("rule,content", [

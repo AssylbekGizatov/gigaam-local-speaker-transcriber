@@ -4,6 +4,14 @@ End users use the complete portable ZIP. This document is for developers. Runtim
 
 Canonical environment: Windows x64, PowerShell 7, official Python **3.12.10 x64 with Tcl/Tk**, Git, a fresh short-path virtual environment. Local development/frozen evidence on this machine uses **3.12.3**; this difference is recorded, not hidden. No byte-for-byte archive reproducibility is promised.
 
+Keep the included `.gitattributes` in source checkouts and developer ZIPs. It
+disables Git line-ending conversion for this repository so checksum-pinned full
+license notices and frozen-source inputs retain their exact published bytes,
+including with Windows `core.autocrlf=true`. This does not change system or global
+Git settings. A license checksum failure is an integrity failure: do not replace
+the pinned digest with a checksum of a rewritten file. Use a fresh checkout that
+includes `.gitattributes` and keep the original vendor terms intact.
+
 ## Commands
 
 From a fresh source checkout in a permitted short directory:

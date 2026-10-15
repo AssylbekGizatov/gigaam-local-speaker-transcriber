@@ -1,0 +1,5 @@
+# Preserve the exact bytes published in Git on every checkout, including Windows.
+# Full vendor/model license hashes and frozen-source attestations are byte-based.
+# Do not let core.autocrlf/core.eol rewrite notices, source, fonts, WAV or DOCX.
+# -text disables line-ending conversion; normal text diffs remain available.
+* -text

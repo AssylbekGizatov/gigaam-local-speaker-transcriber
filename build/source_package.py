@@ -17,7 +17,7 @@ import zipfile
 
 ROOT_FILES = (
     "app.py", "requirements-runtime.txt", "requirements-build.txt", "GigaAM-Meeting.spec",
-    "LICENSE", "NOTICE.md", "README.md", ".gitignore", "CHANGELOG.md",
+    "LICENSE", "NOTICE.md", "README.md", ".gitignore", ".gitattributes", "CHANGELOG.md",
     "assets/licenses/diarization/LICENSE-pyannote-MIT.txt",
     "assets/licenses/diarization/LICENSE-WeSpeaker-CC-BY-4.0.txt",
     "assets/licenses/diarization/LICENSE-sherpa-onnx-APACHE-2.0.txt",
